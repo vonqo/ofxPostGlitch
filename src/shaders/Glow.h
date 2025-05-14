@@ -29,6 +29,7 @@ public:
                                      uniform sampler2DRect image;
                                      uniform float rand;
                                      uniform int range;
+                                     uniform float weight;
                                      
                                      in vec3 pos;
                                      
@@ -43,10 +44,10 @@ public:
                                          int blur_w = 8;
                                          float pi = 3.1415926535;
                                          vec4 gws = vec4(0.0,0.0,0.0,1.0);
-                                         float weight;
+                                         float wweight;
                                          float k = 1.0;
                                          
-                                         weight = 1.0/(float(blur_w)*2.0+1.0)/(float(blur_w)*2.0+1.0);
+                                         wweight = 1.0/(float(blur_w)*2.0+1.0)/(float(blur_w)*2.0+1.0) * weight;
                                          
                                          // This algorithm doesn't support Intel HD graphics...
                                          
@@ -58,10 +59,10 @@ public:
                                          //    }
                                          
                                          for (int i = 0;i < blur_w*blur_w;i++){
-                                             gws = gws + texture(image,vec2(pos.x+float(mod(float(i),float(blur_w))),pos.y+float(i/blur_w)))*weight*1.3;
-                                             gws = gws + texture(image,vec2(pos.x-float(mod(float(i),float(blur_w))),pos.y+float(i/blur_w)))*weight*1.3;
-                                             gws = gws + texture(image,vec2(pos.x+float(mod(float(i),float(blur_w))),pos.y-float(i/blur_w)))*weight*1.3;
-                                             gws = gws + texture(image,vec2(pos.x-float(mod(float(i),float(blur_w))),pos.y-float(i/blur_w)))*weight*1.3;
+                                             gws = gws + texture(image,vec2(pos.x+float(mod(float(i),float(blur_w))),pos.y+float(i/blur_w)))*wweight*1.3;
+                                             gws = gws + texture(image,vec2(pos.x-float(mod(float(i),float(blur_w))),pos.y+float(i/blur_w)))*wweight*1.3;
+                                             gws = gws + texture(image,vec2(pos.x+float(mod(float(i),float(blur_w))),pos.y-float(i/blur_w)))*wweight*1.3;
+                                             gws = gws + texture(image,vec2(pos.x-float(mod(float(i),float(blur_w))),pos.y-float(i/blur_w)))*wweight*1.3;
                                          }
                                          
                                          
@@ -77,6 +78,7 @@ public:
                                      uniform sampler2DRect image;
                                      uniform float rand;
                                      uniform int range;
+                                     uniform float weight;
                                      
                                      varying vec3 pos;
                                      

@@ -33,6 +33,7 @@ public:
                                      uniform int flags;
                                      uniform vec2 blur_vec;
                                      uniform float timer;
+                                     uniform float weight;
                                      int flgs;
                                      float pix_w;
                                      float pix_h;
@@ -48,7 +49,7 @@ public:
                                          
                                          vec2 texCoord = vec2(pos.x,pos.y);
                                          vec4 col = texture(image,texCoord);
-                                         vec4 col_s = texture(image,texCoord + vec2(sin(pos.y*0.03+timer*20.0)*(6.0+12.0*rand),0));
+                                         vec4 col_s = texture(image,texCoord + vec2(sin(pos.y*0.03+timer*14.0)*(6.0+12.0*rand)*weight,0));
                                          
                                          col = col_s;
                                          //    col.r = col.r * sin(rand);
@@ -71,6 +72,7 @@ public:
                                      uniform int flags;
                                      uniform vec2 blur_vec;
                                      uniform float timer;
+                                     uniform float weight;
                                      int flgs;
                                      float pix_w;
                                      float pix_h;
@@ -84,7 +86,7 @@ public:
                                          
                                          vec2 texCoord = vec2(pos.x,pos.y);
                                          vec4 col = texture2DRect(image,texCoord);
-                                         vec4 col_s = texture2DRect(image,texCoord + vec2(sin(pos.y*0.03+timer*20.0)*(6.0+12.0*rand),0));
+                                         vec4 col_s = texture2DRect(image,texCoord + vec2(sin(pos.y*0.03+timer*14.0)*(6.0+12.0*rand)*weight,0));
                                          
                                          col = col_s;
                                          //    col.r = col.r * sin(rand);

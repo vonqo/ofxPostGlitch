@@ -32,6 +32,7 @@ public:
                                       */
                                      
                                      uniform sampler2DRect image;
+                                     uniform float weight;
                                      in vec3 pos;
                                      
                                      out vec4 fragColor;
@@ -77,6 +78,7 @@ public:
                                       */
                                      
                                      uniform sampler2DRect image;
+                                     uniform float weight;
                                      varying vec3 pos;
                                      
                                      void main (void)

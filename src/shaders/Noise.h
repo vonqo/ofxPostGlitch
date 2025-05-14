@@ -29,6 +29,7 @@ public:
                                      uniform sampler2DRect image;
                                      uniform float rand;
                                      uniform int range;
+                                     uniform float weight;
                                      
                                      in vec3 pos;
                                      
@@ -113,7 +114,7 @@ public:
                                          vec2 texCoord = vec2(pos.x , pos.y);
                                          vec4 col = texture(image,texCoord);
                                          
-                                         col.rgb = col.rgb + snoise(vec2(pos.x*pos.y+rand*231.5 , pos.x+pos.y-rand*324.1))*0.5;
+                                         col.rgb = col.rgb + snoise(vec2(pos.x*pos.y+rand*231.5 , pos.x+pos.y-rand*324.1))*0.5*weight;
                                          
                                          fragColor = col.rgba;
                                      }
@@ -127,6 +128,7 @@ public:
                                      uniform sampler2DRect image;
                                      uniform float rand;
                                      uniform int range;
+                                     uniform float weight;
                                      
                                      varying vec3 pos;
                                      

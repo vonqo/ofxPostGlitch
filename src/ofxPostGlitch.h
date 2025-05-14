@@ -100,7 +100,10 @@ public:
 	void setFbo(ofFbo* buffer_);
 
 	/* Switch each effects on/off */
-	void setFx(ofxPostGlitchType type_,bool enabled);
+	/* void setFx(ofxPostGlitchType type_,bool enabled); */
+    
+    /* Switch each effects with weight (range 0 to 1)*/
+    void setFx(ofxPostGlitchType type_,float weight);
 
 	/* Toggle each effects on/off */
 	void toggleFx(ofxPostGlitchType type_);
@@ -113,6 +116,7 @@ public:
 
 protected:
 	bool		bShading[GLITCH_NUM];
+    float       bShadingWeight[GLITCH_NUM];
 	ofShader	shader[GLITCH_NUM];
 	ofFbo*		targetBuffer;
 	ofFbo		ShadingBuffer;

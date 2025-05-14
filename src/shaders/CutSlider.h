@@ -30,6 +30,7 @@ public:
                                      uniform int imgWidth;
                                      uniform int imgHeight;
                                      uniform float rand;
+                                     uniform float weight;
                                      uniform int flags;
                                      uniform vec2 blur_vec;
                                      int flgs;
@@ -64,6 +65,7 @@ public:
                                      uniform int imgWidth;
                                      uniform int imgHeight;
                                      uniform float rand;
+                                     uniform float weight;
                                      uniform int flags;
                                      uniform vec2 blur_vec;
                                      int flgs;

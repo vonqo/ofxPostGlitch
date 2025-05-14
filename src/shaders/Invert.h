@@ -36,6 +36,7 @@ public:
                                      uniform float val2;
                                      uniform float val3;
                                      uniform float val4;
+                                     uniform float weight;
                                      int flgs;
                                      float pix_w;
                                      float pix_h;
@@ -46,7 +47,7 @@ public:
                                      void main (void)
                                      {
                                          vec2 texCoord = vec2(pos.x , pos.y);
-                                         vec4 col = texture(image,texCoord);;
+                                         vec4 col = texture(image,texCoord);
                                          col.r = 1.0 - col.r;
                                          col.g = 1.0 - col.g;
                                          col.b = 1.0 - col.b;
@@ -69,6 +70,7 @@ public:
                                      uniform float val2;
                                      uniform float val3;
                                      uniform float val4;
+                                     uniform float weight;
                                      int flgs;
                                      float pix_w;
                                      float pix_h;
@@ -77,7 +79,7 @@ public:
                                      void main (void)
                                      {
                                          vec2 texCoord = vec2(pos.x , pos.y);
-                                         vec4 col = texture2DRect(image,texCoord);;
+                                         vec4 col = texture2DRect(image,texCoord);
                                          col.r = 1.0 - col.r;
                                          col.g = 1.0 - col.g;
                                          col.b = 1.0 - col.b;

@@ -29,6 +29,7 @@ public:
                                      uniform sampler2DRect image;
                                      uniform float rand;
                                      uniform int range;
+                                     uniform float weight;
                                      
                                      in vec3 pos;
                                      

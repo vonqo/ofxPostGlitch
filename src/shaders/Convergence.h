@@ -28,6 +28,7 @@ public:
             fragmentShader = GLSL150(
                                      uniform sampler2DRect image;
                                      uniform float rand;
+                                     uniform float weight;
                                      
                                      in vec3 pos;
                                      
@@ -38,9 +39,9 @@ public:
                                          vec2 texCoord = vec2(pos.x , pos.y);
                                          
                                          vec4 col = texture(image,texCoord);
-                                         vec4 col_r = texture(image,texCoord + vec2(-35.0*rand,0));
-                                         vec4 col_l = texture(image,texCoord + vec2( 35.0*rand,0));
-                                         vec4 col_g = texture(image,texCoord + vec2( -7.5*rand,0));
+                                         vec4 col_r = texture(image,texCoord + vec2(-45.0*rand*weight,0));
+                                         vec4 col_l = texture(image,texCoord + vec2( 45.0*rand*weight,0));
+                                         vec4 col_g = texture(image,texCoord + vec2(-12.5*rand*weight,0));
                                          
                                          
                                          col.b = col.b + col_r.b*max(1.0,sin(pos.y*1.2)*2.5)*rand;
@@ -58,6 +59,7 @@ public:
             fragmentShader = GLSL120(
                                      uniform sampler2DRect image;
                                      uniform float rand;
+                                     uniform float weight;
                                      
                                      varying vec3 pos;
                                      
@@ -66,9 +68,9 @@ public:
                                          vec2 texCoord = vec2(pos.x , pos.y);
                                          
                                          vec4 col = texture2DRect(image,texCoord);
-                                         vec4 col_r = texture2DRect(image,texCoord + vec2(-35.0*rand,0));
-                                         vec4 col_l = texture2DRect(image,texCoord + vec2( 35.0*rand,0));
-                                         vec4 col_g = texture2DRect(image,texCoord + vec2( -7.5*rand,0));
+                                         vec4 col_r = texture2DRect(image,texCoord + vec2(-45.0*rand*weight,0));
+                                         vec4 col_l = texture2DRect(image,texCoord + vec2( 45.0*rand*weight,0));
+                                         vec4 col_g = texture2DRect(image,texCoord + vec2(-12.5*rand*weight,0));
                                          
                                          
                                          col.b = col.b + col_r.b*max(1.0,sin(pos.y*1.2)*2.5)*rand;

@@ -18,8 +18,14 @@ void ofxPostGlitch::setFbo(ofFbo *buffer_){
 	ShadingBuffer.allocate(buffer_size.x,buffer_size.y);
 }
 
-void ofxPostGlitch::setFx(ofxPostGlitchType type_, bool enabled){
-	bShading[type_] = enabled;
+void ofxPostGlitch::setFx(ofxPostGlitchType type_, float weight){
+    if(weight <= 0) {
+        bShading[type_] = false;
+        bShadingWeight[type_] = 0;
+    } else {
+        bShading[type_] = true;
+        bShadingWeight[type_] = weight > 1 ? 1 : weight;
+    }
 }
 
 void ofxPostGlitch::toggleFx(ofxPostGlitchType type_){
@@ -35,10 +41,11 @@ void ofxPostGlitch::generateFx(){
 		ofLog(OF_LOG_WARNING, "ofxFboFX --- Fbo is not allocated.");
 		return;
 	}
-
+    
 	static int step = ofRandom(4,15);
 	float v[2];
-	v[0] = ofRandom(3);v[1] = ofRandom(3);
+	v[0] = ofRandom(3);
+    v[1] = ofRandom(3);
 	if (ofGetFrameNum() % step == 0){
 		step = ofRandom(10,30);
 		ShadeVal[0] = ofRandom(100);
@@ -52,17 +59,22 @@ void ofxPostGlitch::generateFx(){
 
 	for (int i = 0;i < GLITCH_NUM;i++){
 		if (bShading[i]){
+            float weight = bShadingWeight[i];
+            
 			shader[i].begin();
 			shader[i].setUniformTexture	("image"		,*targetBuffer,0);
 			shader[i].setUniform1i		("trueWidth"	,buffer_size.x);
 			shader[i].setUniform1i		("trueHeight"	,buffer_size.y);
 			shader[i].setUniform1f		("rand"			,ofRandom(1));
-			shader[i].setUniform1f		("mouseX"		,ofGetMouseX());
-			shader[i].setUniform1f		("mouseY"		,ofGetMouseY());
-			shader[i].setUniform1f		("val1"			,ShadeVal[0]);
+//			shader[i].setUniform1f		("mouseX"		,ofGetMouseX());
+//			shader[i].setUniform1f		("mouseY"		,ofGetMouseY());
+            shader[i].setUniform1f      ("mouseX"       ,ofMap(weight, 0, 1, 0, ofGetWidth()));
+            shader[i].setUniform1f      ("mouseY"       ,ofMap(weight, 0, 1, 0, ofGetHeight()));
+            shader[i].setUniform1f		("val1"			,ShadeVal[0]);
 			shader[i].setUniform1f		("val2"			,ShadeVal[1]);
 			shader[i].setUniform1f		("val3"			,ShadeVal[2]);
 			shader[i].setUniform1f		("val4"			,ShadeVal[3]);
+            shader[i].setUniform1f      ("weight"       ,weight);
 			shader[i].setUniform1f		("timer"		,ofGetElapsedTimef());
 			shader[i].setUniform2fv		("blur_vec"		,v);
 

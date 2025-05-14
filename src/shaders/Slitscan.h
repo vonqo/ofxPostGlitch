@@ -36,6 +36,7 @@ public:
                                      uniform float val2;
                                      uniform float val3;
                                      uniform float val4;
+                                     uniform float weight;
                                      int flgs;
                                      float pix_w;
                                      float pix_h;
@@ -73,6 +74,7 @@ public:
                                      uniform float val2;
                                      uniform float val3;
                                      uniform float val4;
+                                     uniform float weight;
                                      int flgs;
                                      float pix_w;
                                      float pix_h;
